@@ -1,0 +1,27 @@
+
+{% extends "home-base.html"%}
+{% block title %}Home Page{% endblock %}
+
+{% block head%}
+  {{ super() }}
+{% endblock%}
+
+{% block page_content%}
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-address-card-o" aria-hidden="true"></i> About Me</h1>
+    <p>This project is developed by <a id="developer" href="https://github.com/abbysawyer2" data-toggle="tooltip" data-placement="top" title="Junior at University of Delaware">Abby Sawyer</a>.</p>
+    <p> I am a junior Accounting and MIS double major at UD </p>
+    <h2 class="mt-5"><i class="fa fa-envelope-o" aria-hidden="true"></i> Feel free to contact me!</h2>
+  </div>
+
+{% endblock%}
+
+{% block scripts%}
+  {{super()}}
+  <script>
+  $(document).ready(function () {
+    $('#developer').tooltip()
+  });
+  </script>
+{% endblock%}
