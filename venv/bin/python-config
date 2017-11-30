@@ -1,4 +1,4 @@
-#!/Users/abbysawyer/Documents/MISY350/my-resume/venv/bin/python
+#!/Users/abbysawyer/Documents/misy350/my-resume/venv/bin/python
 
 import sys
 import getopt

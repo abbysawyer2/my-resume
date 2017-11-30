@@ -5,91 +5,69 @@
 {% endblock%}
 {% block page_content%}
 
-  <!-- Page Content -->
-  <div class="container">
-    <h1 class="mt-5"> <i class="fa fa-book" aria-hidden="true"></i> Courses taken at UD:</h1>
-    <ul>
+<!-- Page Content -->
+<div class="container">
+  <h1 class="mt-5"> Courses:</h1>
+  <div class="row bottom-margin">
+    <a href="/course/add" class="btn btn-primary" role="button" aria-disabled="true">Add Courses</a>
+  </div>
+  {% if courses %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>CourseNum</th>
+          <th>Title</th>
+          <th>Professor</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
         {% for course in courses %}
-          <li>{{course}}</li>
-        {% endfor%}
-    </ul>
-
-
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    CISC108
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">CISC108: Introduction to Computer Science I</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Focus on design recipe
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      MISY330
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">MISY330: Database Design</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+        <tr>
+            <th scope="row">{{course.id}}</th>
+            <td>{{course.coursenum}}</td>
+            <td>{{course.title}}</td>
+            <td>{{course.professor.name}}</td>
+            <td>
+            <!--  view lyrics button trigger modal -->
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#{{course.id}}">
+              View
             </button>
-          </div>
-          <div class="modal-body">
-            Use mySQL and Access to work on queries and database design and implementation
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        MISY350
-      </button>
+            <!-- Modal -->
+            <div class="modal fade" id="{{course.id}}" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{course.name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    {{course.description}}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+            <td>
+              <a href="/course/edit/{{course.id}}" class="btn btn-success" role="button" aria-disabled="true">Edit</a>
+              <a href="/course/delete/{{course.id}}" class="btn btn-danger" role="button" aria-disabled="true">Delete</a>
+            </td>
+        </tr>
 
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">MISY350: Business Application Development II</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Back end to front end website design
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-  </div>
+        {% endfor%}
+      </tbody>
+    </table>
+  {% else %}
+    <h3>There are no courses in the database yet.</h3>
+  {% endif %}
+</div>
 
 {% endblock%}
